@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { AgGridAngular } from "ag-grid-angular";
 import type { ColDef } from "ag-grid-community";
 import { AllCommunityModule, ModuleRegistry } from "ag-grid-community";
-import { Hero, HeroService } from './services/HeroService';
+import { Champion, ChampionService } from './services/ChampionService';
 
 ModuleRegistry.registerModules([AllCommunityModule]);
 
@@ -19,35 +19,36 @@ ModuleRegistry.registerModules([AllCommunityModule]);
 })
 export class AppComponent {
   title = 'lol-champions';
-  // Row Data: The data to be displayed.
- /* rowData = [
-    { make: "Tesla", model: "Model Y", price: 64950, electric: true },
-    { make: "Ford", model: "F-Series", price: 33850, electric: false },
-    { make: "Toyota", model: "Corolla", price: 29600, electric: false },
-  ];*/
-  rowData : Hero[] = [];
-
-  // Column Definitions: Defines the columns to be displayed.
-  /*colDefs: ColDef[] = [
-    { field: "make" },
-    { field: "model" },
-    { field: "price" },
-    { field: "electric" }
-  ];*/
-  colDefs: ColDef[] = [
-    {field: "id"},
-    {field: "name"}
+  
+  rowData: Champion[] = [];
+  columnDefs: ColDef[] = [
+    { field: 'name', sortable: true, filter: true },
+    { field: 'title', sortable: true, filter: true },
+    { field: 'tags', sortable: true, filter: true, valueFormatter: params => Array.isArray(params.value) ? params.value.join(', ') : ''},
   ];
+
   defaultColDef: ColDef = {
     flex: 1,
+    sortable: true,
+    filter: true,
   };
- private heroService=inject(HeroService);
 
-  ngOnInit() {
+  private championService = inject(ChampionService);
+
+  ngOnInit(): void {
     this.load();
   }
 
-  private load() {
-    this.heroService.getHeroes().subscribe(heroes => this.rowData = heroes);
-  }
+private load(): void {
+  this.championService.getChampions().subscribe({
+    next: champions => {
+      console.log('Champions chargés dans component:', champions);
+      this.rowData = champions;
+    },
+    error: err => console.error('Erreur lors du chargement des champions:', err)
+  });
 }
+
+  private tagsFormatter(params: any): string {
+    return Array.isArray(params.value) ? params.value.join(', ') : '';
+  }}
