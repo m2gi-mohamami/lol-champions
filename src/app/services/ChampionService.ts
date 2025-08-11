@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { map, Observable } from "rxjs";
+import { Observable } from "rxjs";
 export interface Champion {
  id: string;
   key: string;
@@ -11,16 +11,11 @@ export interface Champion {
 
 @Injectable({ providedIn: 'root' })
 export class ChampionService {
-   private baseUrl = 'assets/data/champion_info_2.json';
+   private baseUrl = 'api/champions'; 
 
   constructor(private http: HttpClient) {}
  getChampions(): Observable<Champion[]> {
-    return this.http.get<{ data: Record<string, Champion> }>(this.baseUrl).pipe(
-      map(json => {
-        const championsArray = Object.values(json.data);
-        return championsArray;
-      })
-    );
+    return this.http.get<Champion[]>(this.baseUrl);
 }
 
 }
