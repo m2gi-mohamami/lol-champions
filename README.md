@@ -1,59 +1,28 @@
-# LolChampions
+# LoL Champions - Test Technique Angular
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.2.
+# Description
+Ce projet est une application Angular permettant de lister les champions de League of Legends en utilisant AG Grid.
+L'application utilise un service en mémoire (angular-in-memory-web-api) pour simuler un backend REST qui sert les données des champions à partir d'un fichier JSON local.
 
-## Development server
+Une fonctionnalité de suppression d'un champion est également implémentée côté front-end : cliquer sur la poubelle supprime la ligne dans la grille.
 
-To start a local development server, run:
+# Fonctionnalités
 
-```bash
-ng serve
-```
+1-Affichage des colonnes : numéro, nom, titre, tags, et actions.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+2- Suppression dynamique d'un champion dans la liste (front-end uniquement).
 
-## Code scaffolding
+3- Données chargées depuis un service simulé en mémoire à partir d'un fichier JSON local.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+# Structure du projet
+# app.component.ts : 
+ composant principal avec la grille AG Grid et la logique de suppression.
 
-```bash
-ng generate component component-name
-```
+# ChampionService : 
+ service Angular pour récupérer et supprimer les champions via HTTP.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+# InMemoryDataService : 
+ service simulant un backend REST avec les données chargées depuis champion_info_2.json.
 
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+# assets/data/champion_info_2.json : 
+ fichier JSON contenant les données des champions.
