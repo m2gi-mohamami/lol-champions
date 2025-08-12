@@ -18,13 +18,36 @@ ModuleRegistry.registerModules([AllCommunityModule]);
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  deleteChampion(id: any) {
+    this.championService.deleteChampion(id).subscribe(()=>{
+      this.rowData = this.rowData.filter(champ => champ.id !== id);
+    });
+  }
   title = 'lol-champions';
   
   rowData: Champion[] = [];
   columnDefs: ColDef[] = [
+      { 
+    headerName: '#', 
+    valueGetter: (params) => (params.node?.rowIndex ?? -1) + 1, 
+    width: 70 
+  },
     { field: 'name', sortable: true, filter: true },
     { field: 'title', sortable: true, filter: true },
     { field: 'tags', sortable: true, filter: true, valueFormatter: params => Array.isArray(params.value) ? params.value.join(', ') : ''},
+    //actions
+    {headerName: 'Actions',
+      cellRenderer: (params: any) => {
+        return `<button class="btn-delete" data-id="${params.data.id}">🗑️</button>`;
+      },
+      onCellClicked:(params: any)=>{
+         if (params.event.target.classList.contains('btn-delete')) {
+          console.log(params.data)
+          this.deleteChampion(params.data.id);
+        }
+      }
+
+    }
   ];
 
   defaultColDef: ColDef = {
@@ -49,6 +72,4 @@ private load(): void {
   });
 }
 
-  private tagsFormatter(params: any): string {
-    return Array.isArray(params.value) ? params.value.join(', ') : '';
-  }}
+}
