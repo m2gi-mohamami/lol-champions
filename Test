@@ -1,0 +1,24 @@
+# Test Angular
+League of legends (LoL) est un jeu de type MOBA massivement joué dans le monde. Il se base sur un principe de 2 équipes de 5 joueurs, qui s'affrontent via des champions. Le but est de détruire la base ennemie tout en protégeant la sienne.
+
+# Consignes
+·Réaliser un écran permettant de lister les champions
+
+# Bonus : 
+Le candidat est libre de proposer des écrans et visualisations supplémentaires qu'il juge pertinentes, par exemple un écran permettant de supprimer un champion
+
+# Spécifications
+·Librairies à utiliser (à minima) :
+  *Angular 10+
+  *Material Design
+  *Reactive Form (pas de Template)
+  *AG-Grid (https://www.ag-grid.com/)
+·Pas de serveur, le service doit être front-end uniquement. Mais doit implémenter un mécanisme de Web Service (https://github.com/angular/in-memory-web-api). Il se basera sur les fichiers json fournis.
+
+# Dataset
+DATASET: (LoL) League of Legends Ranked Games | Kaggle
+
+# Livrable
+·Repo github et site accessible en ligne (via github, ou autre solution similaire).
+
+·Pas de compilation ni déploiement nécessaire de la part de CFM : la visualisation du résultat doit être faisable en ligne
