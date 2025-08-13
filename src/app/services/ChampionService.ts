@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 export interface Champion {
- id: string;
+  id: string;
   key: string;
   name: string;
   title: string;
@@ -11,15 +11,15 @@ export interface Champion {
 
 @Injectable({ providedIn: 'root' })
 export class ChampionService {
-    private apiUrl = 'api/champions'; 
+  private apiUrl = 'api/champions'; 
+ 
+
+  constructor(private http: HttpClient) {}
+  getChampions(): Observable<Champion[]> {
+    return this.http.get<Champion[]>(this.apiUrl);
+  }
   deleteChampion(id: any): Observable<any> {
    return this.http.delete(`${this.apiUrl}/${id}`);
   }
   
-
-  constructor(private http: HttpClient) {}
- getChampions(): Observable<Champion[]> {
-    return this.http.get<Champion[]>(this.apiUrl);
-}
-
 }

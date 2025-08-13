@@ -18,11 +18,7 @@ ModuleRegistry.registerModules([AllCommunityModule]);
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  deleteChampion(id: any) {
-    this.championService.deleteChampion(id).subscribe(()=>{
-      this.rowData = this.rowData.filter(champ => champ.id !== id);
-    });
-  }
+  
   title = 'lol-champions';
   
   rowData: Champion[] = [];
@@ -71,5 +67,10 @@ private load(): void {
     error: err => console.error('Erreur lors du chargement des champions:', err)
   });
 }
+deleteChampion(id: any) {
+    this.championService.deleteChampion(id).subscribe(()=>{
+      this.rowData = this.rowData.filter(champ => champ.id !== id);
+    });
+  }
 
 }
